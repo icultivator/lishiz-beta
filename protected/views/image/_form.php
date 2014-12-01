@@ -27,9 +27,11 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cover'); ?>
-		<?php echo $form->textField($model,'cover',array('size'=>60,'maxlength'=>100)); ?>
+        <input type="file" id="Image_upload" name="image"/>
+		<?php echo $form->hiddenField($model,'cover'); ?>
 		<?php echo $form->error($model,'cover'); ?>
 	</div>
+    <div class="preview" id="Image_preview"></div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'content'); ?>
@@ -42,6 +44,17 @@
         <?php echo $form->textField($model,'tags',array('size'=>60,'maxlength'=>100)); ?>
         <?php echo $form->error($model,'tags'); ?>
     </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'status'); ?>
+        <?php echo $form->dropDownList($model,'status',array(Image::Image_DRAFT=>'草稿',Image::Image_PUBLISHED=>'发布')); ?>
+        <?php echo $form->error($model,'status'); ?>
+    </div>
+
+    <?php $this->widget('ext.fileupload.MFileUploadWidget',array(
+        'id'=>'Image_upload','cover'=>'Image_cover','preview'=>'Image_preview','request'=>'/image/upload'))?>
+    <?php $this->widget('ext.tagsinput.MTagsWidget',array(
+        'id'=>'Image_tags'))?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

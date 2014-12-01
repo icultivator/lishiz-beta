@@ -15,7 +15,7 @@ class m141201_020735_create_image_table extends MDbMigration
             collects INT UNSIGNED DEFAULT 0,
             comments INT UNSIGNED DEFAULT 0,
             user_id INT UNSIGNED DEFAULT 0,
-            upload_time INT UNSIGNED DEFAULT 0,
+            create_time INT UNSIGNED DEFAULT 0,
             last_update INT UNSIGNED DEFAULT 0,
             PRIMARY KEY (id)
         ) ENGINE=InnoDB DEFAULT charset=utf8";

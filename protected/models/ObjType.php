@@ -8,10 +8,11 @@
 class ObjType{
     const ITEM_USER = 1;
     const ITEM_POST = 2;
-    const ITEM_BOOK = 3;
-    const ITEM_VIDEO = 4;
-    const ITEM_TOPIC = 5;
-    const ITEM_COMMENT = 6;
+    const ITEM_IMAGE = 3;
+    const ITEM_BOOK = 4;
+    const ITEM_VIDEO = 5;
+    const ITEM_TOPIC = 6;
+    const ITEM_COMMENT = 7;
 
     public static function get($obj_type){
         switch($obj_type){
@@ -20,6 +21,9 @@ class ObjType{
                 break;
             case self::ITEM_POST:
                 $obj = 'post';
+                break;
+            case self::ITEM_IMAGE:
+                $obj = 'image';
                 break;
             case self::ITEM_BOOK:
                 $obj = 'book';

@@ -32,7 +32,7 @@ class ImageController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','upload','addimage'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,8 +51,25 @@ class ImageController extends Controller
 	 */
 	public function actionView($id)
 	{
+        $model = $this->loadModel($id);
+        $model->setScenario('view');
+
+        if(isset($_GET['preview'])){
+            $model->views += 1;
+            $model->save(false);
+        }
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'obj_type=:type AND obj_id = :oid AND status = :status AND parent_id = 0';
+        $criteria->params = array(':type'=>$model->obj_type,':oid'=>$id,':status'=>Comment::COMMENT_ALLOWED);
+        $criteria->order = 'comment_time DESC';
+        $comments = new CActiveDataProvider('Comment',array(
+            'criteria'=>$criteria
+        ));
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+            'comments'=>$comments
 		));
 	}
 
@@ -62,7 +79,7 @@ class ImageController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Image;
+		$model=new Image('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -87,12 +104,14 @@ class ImageController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+        $model->setScenario('update');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Image']))
 		{
+            $model->oldTags = $model->tags;
 			$model->attributes=$_POST['Image'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
@@ -122,10 +141,15 @@ class ImageController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Image');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+        $criteria = new CDbCriteria();
+        $criteria->select = 'id,title,cover,views,votes,tags,last_update,create_time';
+        $criteria->condition = 'status = :status';
+        $criteria->params = array(':status'=>Image::Image_PUBLISHED);
+        $criteria->order = 'create_time DESC';
+        $dataProvider=new CActiveDataProvider('Image',array('criteria'=>$criteria));
+        $this->render('index',array(
+            'dataProvider'=>$dataProvider,
+        ));
 	}
 
 	/**
@@ -199,17 +223,16 @@ class ImageController extends Controller
     public function actionAddImage($id){
 
         $model = $this->loadModel($id);
-
         $userUpload = new UserUpload();
-        $userUpload->parent_id = $model->id;
 
         if(isset($_POST['UserUpload'])){
+            $userUpload->parent_id = $model->id;
             $userUpload->attributes = $_POST['UserUpload'];
             if($userUpload->save()){
                 $this->redirect('/image/'.$id);
             }
         }
 
-        $this->render('addimage',array('model'=>$userUpload));
+        $this->render('addimage',array('model'=>$userUpload,'image'=>$model));
     }
 }

@@ -9,29 +9,23 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'List Image', 'url'=>array('index')),
-	array('label'=>'Create Image', 'url'=>array('create')),
+	array('label'=>'Add Image', 'url'=>array('addimage','id'=>$model->id)),
 	array('label'=>'Update Image', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete Image', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Image', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Image #<?php echo $model->id; ?></h1>
+<h1>图片集 #<?php echo $model->title; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'title',
-		'cover',
-		'content',
-		'status',
-		'views',
-		'votes',
-		'collects',
-		'comments',
-		'user_id',
-		'upload_time',
-		'last_update',
-	),
-)); ?>
+<div class="header">
+    由<?php echo $model->user->name;?>创建于<i><?php echo date('Y-m-d H:i:s',$model->create_time)?></i>
+</div>
+
+<div class="content">
+
+</div>
+
+<div class="footer">
+    标签：<?php echo $model->tags;?>
+</div>

@@ -94,10 +94,11 @@ return array(
         'obj_type'=>array(
             'user'=>1,
             'post'=>2,
-            'book'=>3,
-            'video'=>4,
-            'topic'=>5,
-            'comment'=>6
+            'image'=>3,
+            'book'=>4,
+            'video'=>5,
+            'topic'=>6,
+            'comment'=>7
         ),
         'video_type'=>array(
             '1'=>'电影',

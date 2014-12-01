@@ -19,6 +19,22 @@
  */
 class Image extends CActiveRecord
 {
+
+    const Image_DRAFT = 0;
+    const Image_PUBLISHED = 1;
+
+    public $oldTags = '';
+    public $obj_type = 0;
+    private $userFlow = NULL;
+    private $userMessage = NULL;
+
+    public function __construct($scenario='insert'){
+        $this->obj_type = Yii::app()->params['obj_type']['image'];
+        $this->userFlow = new UserFlow();
+        $this->userMessage = new UserMessage();
+        return parent::__construct($scenario);
+    }
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -35,13 +51,14 @@ class Image extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, cover,tags', 'required'),
+			array('title, cover, tags', 'required'),
+            array('title','unique'),
 			array('status', 'numerical', 'integerOnly'=>true),
 			array('title, cover,tags', 'length', 'max'=>100),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, cover, content, status, views, votes, collects, comments, user_id, upload_time, last_update', 'safe', 'on'=>'search'),
+			array('id, title, cover, content, status, views, votes, collects, comments, user_id, create_time, last_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +70,7 @@ class Image extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'user'=>array(self::BELONGS_TO,'User','user_id')
 		);
 	}
 
@@ -63,18 +81,18 @@ class Image extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'title' => 'Title',
-			'cover' => 'Cover',
-			'content' => 'Content',
+			'title' => '标题',
+			'cover' => '封面图',
+			'content' => '详情',
             'tags' => '标签',
-			'status' => 'Status',
-			'views' => 'Views',
-			'votes' => 'Votes',
-			'collects' => 'Collects',
-			'comments' => 'Comments',
-			'user_id' => 'User',
-			'upload_time' => 'Upload Time',
-			'last_update' => 'Last Update',
+			'status' => '状态',
+			'views' => '浏览',
+			'votes' => '点赞',
+			'collects' => '收藏',
+			'comments' => '评论',
+			'user_id' => '创建者',
+			'create_time' => '创建时间',
+			'last_update' => '最后更新',
 		);
 	}
 
@@ -106,7 +124,7 @@ class Image extends CActiveRecord
 		$criteria->compare('collects',$this->collects,true);
 		$criteria->compare('comments',$this->comments,true);
 		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('upload_time',$this->upload_time,true);
+		$criteria->compare('create_time',$this->upload_time,true);
 		$criteria->compare('last_update',$this->last_update,true);
 
 		return new CActiveDataProvider($this, array(
@@ -128,14 +146,72 @@ class Image extends CActiveRecord
     public function beforeSave(){
         if($this->isNewRecord){
             $this->user_id = Yii::app()->user->id;
-            $this->last_update = $this->upload_time = time();
+            $this->last_update = $this->create_time = time();
         }else{
-            $this->last_update = time();
+            if($this->getScenario()=='update')
+                $this->last_update = time();
         }
         return parent::beforeSave();
     }
 
     public function afterSave(){
+        switch($this->getScenario()){
+            case 'create':
+            case 'update':
+                //更新tags
+                if($this->isNewRecord){
+                    $arrNewTags = explode(',',$this->tags);
+                    $arrOldTags = array();
+                }else{
+                    $arrNewTags = explode(',',$this->tags);
+                    $arrOldTags = explode(',',$this->oldTags);
+                }
+                $addTags = array_diff($arrNewTags,$arrOldTags);
+                $delTags = array_diff($arrOldTags,$arrNewTags);
 
+                $objTags = new Tags();
+                $objTags->addTags($addTags);
+                $objTags->delTags($delTags);
+                break;
+        }
+        //新增用户操作时间流
+        if($this->getScenario()!='view'){
+            $this->flow();
+            $this->message();
+        }
+    }
+
+    protected function afterDelete(){
+        $delTags = explode(',',$this->tags);
+        $objTags = new Tags();
+        $objTags->delTags($delTags);
+    }
+
+    public function flow(){
+        $this->userFlow->user_id = Yii::app()->user->id;
+        $this->userFlow->obj_id = $this->id;
+        $this->userFlow->obj_type = $this->obj_type;
+        $this->userFlow->obj_status = $this->status;
+        $this->userFlow->obj_title = $this->title;
+        $this->userFlow->opt_type = Yii::app()->params['opt_type'][$this->getScenario()];
+        $this->userFlow->save(false);
+    }
+
+    public function message(){
+        if(Yii::app()->user->id != $this->user_id){
+            $subject = "您的".Yii::t('item',ObjType::get($this->obj_type)).'有了新'.
+                Yii::t('opt',$this->getScenario());
+            $content = Yii::app()->user->name.Yii::t('opt',$this->getScenario()).'您的'.
+                Yii::t('item',ObjType::get($this->obj_type)).'：'.CHtml::link($this->title,'/post/'.$this->id);
+            $this->userMessage->send($this->user_id,$subject,$content);
+        }
+    }
+
+    public function isVoted(){
+        return UserVote::model()->isVoted($this->id,$this->obj_type);
+    }
+
+    public function isCollected(){
+        return UserCollect::model()->isCollected($this->id,$this->obj_type);
     }
 }

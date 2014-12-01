@@ -7,9 +7,8 @@
  */
 return array(
     'post'=>'文章',
+    'image'=>'图片',
     'book'=>'图书',
     'video'=>'视频',
-    'group'=>'小组',
     'topic'=>'话题',
-    'ask'=>'提问'
 );
