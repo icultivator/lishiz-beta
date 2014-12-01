@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2014-11-30 23:27:00
+Date: 2014-12-01 15:26:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -55,6 +55,7 @@ CREATE TABLE `lsz_comment` (
   `parent_id` int(10) unsigned DEFAULT '0',
   `comment_to` int(10) unsigned DEFAULT '0',
   `content` text NOT NULL,
+  `votes` int(10) unsigned DEFAULT '0',
   `comments` int(10) unsigned DEFAULT '0',
   `user_id` int(10) unsigned DEFAULT '0',
   `status` tinyint(1) unsigned DEFAULT '1',
@@ -65,26 +66,66 @@ CREATE TABLE `lsz_comment` (
 -- ----------------------------
 -- Records of lsz_comment
 -- ----------------------------
-INSERT INTO `lsz_comment` VALUES ('1', '2', '1', '0', '0', '不错！', '0', '1', '1', '1417073197');
-INSERT INTO `lsz_comment` VALUES ('2', '2', '1', '0', '0', '呵呵', '0', '1', '1', '1417073383');
-INSERT INTO `lsz_comment` VALUES ('3', '2', '1', '2', '1', '嘻嘻', '0', '1', '1', '1417073511');
-INSERT INTO `lsz_comment` VALUES ('4', '2', '1', '2', '1', '你妹啊', '0', '1', '1', '1417073775');
-INSERT INTO `lsz_comment` VALUES ('5', '7', '1', '0', '1', '不一样吧', '0', '1', '1', '1417151355');
-INSERT INTO `lsz_comment` VALUES ('6', '7', '1', '0', '1', '不一样呢', '0', '1', '1', '1417151383');
-INSERT INTO `lsz_comment` VALUES ('7', '7', '1', '6', '1', '是啊', '0', '1', '1', '1417151513');
-INSERT INTO `lsz_comment` VALUES ('8', '7', '1', '5', '1', '哇咔咔', '0', '1', '1', '1417151529');
-INSERT INTO `lsz_comment` VALUES ('9', '3', '1', '0', '1', '挺好的！', '0', '1', '1', '1417323678');
-INSERT INTO `lsz_comment` VALUES ('10', '3', '1', '9', '1', '哈哈', '0', '1', '1', '1417323702');
-INSERT INTO `lsz_comment` VALUES ('11', '3', '1', '9', '1', '哈哈', '0', '1', '1', '1417323706');
-INSERT INTO `lsz_comment` VALUES ('12', '3', '1', '9', '1', '哈哈', '0', '1', '1', '1417323722');
-INSERT INTO `lsz_comment` VALUES ('13', '3', '1', '9', '1', '哈哈哈', '0', '1', '1', '1417323784');
-INSERT INTO `lsz_comment` VALUES ('14', '5', '1', '0', '1', '沙发！', '0', '2', '1', '1417324316');
-INSERT INTO `lsz_comment` VALUES ('15', '3', '1', '9', '1', '哈哈哈', '0', '2', '1', '1417326546');
-INSERT INTO `lsz_comment` VALUES ('16', '2', '2', '0', '1', '哈哈，原来如此啊', '0', '2', '1', '1417328314');
-INSERT INTO `lsz_comment` VALUES ('17', '2', '2', '16', '1', '呵呵', '0', '1', '1', '1417328354');
-INSERT INTO `lsz_comment` VALUES ('18', '2', '2', '16', '1', '帝王帝王', '0', '1', '1', '1417328727');
-INSERT INTO `lsz_comment` VALUES ('19', '2', '2', '16', '1', '啊哈哈', '0', '1', '1', '1417329188');
-INSERT INTO `lsz_comment` VALUES ('20', '2', '2', '16', '2', '啊哈哈', '0', '1', '1', '1417329202');
+INSERT INTO `lsz_comment` VALUES ('1', '2', '1', '0', '0', '不错！', '1', '0', '1', '1', '1417073197');
+INSERT INTO `lsz_comment` VALUES ('2', '2', '1', '0', '0', '呵呵', '1', '0', '1', '1', '1417073383');
+INSERT INTO `lsz_comment` VALUES ('3', '2', '1', '2', '1', '嘻嘻', '1', '0', '1', '1', '1417073511');
+INSERT INTO `lsz_comment` VALUES ('4', '2', '1', '2', '1', '你妹啊', '1', '0', '1', '1', '1417073775');
+INSERT INTO `lsz_comment` VALUES ('5', '7', '1', '0', '1', '不一样吧', '0', '0', '1', '1', '1417151355');
+INSERT INTO `lsz_comment` VALUES ('6', '7', '1', '0', '1', '不一样呢', '0', '0', '1', '1', '1417151383');
+INSERT INTO `lsz_comment` VALUES ('7', '7', '1', '6', '1', '是啊', '0', '0', '1', '1', '1417151513');
+INSERT INTO `lsz_comment` VALUES ('8', '7', '1', '5', '1', '哇咔咔', '0', '0', '1', '1', '1417151529');
+INSERT INTO `lsz_comment` VALUES ('9', '3', '1', '0', '1', '挺好的！', '0', '0', '1', '1', '1417323678');
+INSERT INTO `lsz_comment` VALUES ('10', '3', '1', '9', '1', '哈哈', '0', '0', '1', '1', '1417323702');
+INSERT INTO `lsz_comment` VALUES ('11', '3', '1', '9', '1', '哈哈', '0', '0', '1', '1', '1417323706');
+INSERT INTO `lsz_comment` VALUES ('12', '3', '1', '9', '1', '哈哈', '0', '0', '1', '1', '1417323722');
+INSERT INTO `lsz_comment` VALUES ('13', '3', '1', '9', '1', '哈哈哈', '0', '0', '1', '1', '1417323784');
+INSERT INTO `lsz_comment` VALUES ('14', '5', '1', '0', '1', '沙发！', '0', '0', '2', '1', '1417324316');
+INSERT INTO `lsz_comment` VALUES ('15', '3', '1', '9', '1', '哈哈哈', '0', '0', '2', '1', '1417326546');
+INSERT INTO `lsz_comment` VALUES ('16', '2', '2', '0', '1', '哈哈，原来如此啊', '0', '0', '2', '1', '1417328314');
+INSERT INTO `lsz_comment` VALUES ('17', '2', '2', '16', '1', '呵呵', '0', '0', '1', '1', '1417328354');
+INSERT INTO `lsz_comment` VALUES ('18', '2', '2', '16', '1', '帝王帝王', '1', '0', '1', '1', '1417328727');
+INSERT INTO `lsz_comment` VALUES ('19', '2', '2', '16', '1', '啊哈哈', '0', '0', '1', '1', '1417329188');
+INSERT INTO `lsz_comment` VALUES ('20', '2', '2', '16', '2', '啊哈哈', '0', '0', '1', '1', '1417329202');
+
+-- ----------------------------
+-- Table structure for `lsz_image`
+-- ----------------------------
+DROP TABLE IF EXISTS `lsz_image`;
+CREATE TABLE `lsz_image` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `cover` varchar(100) NOT NULL,
+  `content` text,
+  `status` tinyint(3) unsigned DEFAULT '1',
+  `views` int(10) unsigned DEFAULT '0',
+  `votes` int(10) unsigned DEFAULT '0',
+  `collects` int(10) unsigned DEFAULT '0',
+  `comments` int(10) unsigned DEFAULT '0',
+  `user_id` int(10) unsigned DEFAULT '0',
+  `create_time` int(10) unsigned DEFAULT '0',
+  `last_update` int(10) unsigned DEFAULT '0',
+  `tags` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lsz_image
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `lsz_image_upload`
+-- ----------------------------
+DROP TABLE IF EXISTS `lsz_image_upload`;
+CREATE TABLE `lsz_image_upload` (
+  `image_id` int(10) unsigned NOT NULL,
+  `upload_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`image_id`,`upload_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lsz_image_upload
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `lsz_post`
@@ -109,13 +150,14 @@ CREATE TABLE `lsz_post` (
   `last_update` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lsz_post
 -- ----------------------------
-INSERT INTO `lsz_post` VALUES ('1', '十恶不赦”中的十恶指的是哪十恶？', '', '<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	在现代汉语中，常用“十恶不赦”来形容一个人罪大恶极、不可饶恕。但该成语中的“十恶”并非实指，而是泛指重大的罪行。然而，在我国古代，该成语中的“十恶”却是实有所指的。古代的“十恶”指的是律法规定的十条大罪，它是在西汉的“大逆不道不敬”罪的基础上发展起来的。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	北齐河清三年，尚书令、赵郡王等奏上《齐律》十二篇，“列重罪十条：一曰反逆，二曰大逆，三曰叛，四曰降，五曰恶逆，六曰不道，七曰不敬，八曰不孝，九曰不义，十曰内乱。其犯此十者，不在八议论赎之限。”\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	而到了隋朝开皇初年，随着佛教的兴盛，封建统治者遂将佛教之中的“十恶”之名引入律法，以之代替了《齐律》中的“重罪十条”，“十恶”之罪名遂正式出现。如《隋书·刑法志》卷二十五卷即载：“开皇元年……更定新律（指《开皇律》）……又置十恶之条，多采后齐之制，而颇有损益。一曰谋反，二曰谋大逆，三曰谋叛，四曰恶逆，五曰不道，六曰大不敬，七曰不孝，八曰不睦，九曰不义，十曰内乱。犯十恶及故杀人狱成者，虽会赦犹除名。”\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	“十恶”之罪的具体内容，《唐律疏议》中也有详细的规定。由于“十恶”之罪直接危害了君主专制制度的核心——君权、父权、神权和夫权，所以自隋代在《开皇律》中首次确立“十恶”之罪以后，历朝历代律法皆将之作为不赦之重罪，因此，遂有“十恶不赦”之说。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	另外，“十”在语境中表示最多、全了、满了。十恶不赦，那就是恶贯满盈了。“十恶不赦”，常用来形容罪大恶极、不可宽恕的人。古人往往给敌人列上十大罪名，以便出师有名。\r\n</p>', '/images/user/2014/11/27/a86fbf07f2fc6e63973e2f295579bfa8.jpg', '1', '', '文化,典故', '1', '0', '55', '3', '1', '1', '1417073172', '1417160274');
-INSERT INTO `lsz_post` VALUES ('2', '古代处决犯人为什么大多选在午时三刻？', '', '<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	古代刑法中处决犯人时，不但在季节上有要求，并且还具体到一天当中的某一时刻。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	季节上是统一到秋季，即秋后问斩。“秋后问斩”顾名思义，是指在秋季处死犯人。而处斩犯人的具体时间，则选在了秋季的某一天的“午时三刻”，为什么要选中这一时刻呢？因为根据阴阳五行学说，一年之中，秋季是阳气下降、阴气上升的时期，是属于死亡的季节；同样，一日之中，午时三刻以后，阳气下降、阴气上升，因此是死亡的时辰。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	<strong>“午时三刻”具体指的是哪个时间段？</strong> \r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	“午时三刻”是在百刻制使用期间制定出来的。如果令一个时辰等于八刻的话，这一天就多出四刻。为此，有人提出在十二时辰中，子、卯、午、酉各九刻，其余的则为八刻；还有另一种提法则是，子、午各十刻，其余则八刻等。两种说法结合起来分析的话，都是中午以前和中午以后的半天将各分到二刻。这样一来，午时三刻加上前半天分到的二刻，就相当于午时五刻，也就是相当于全部午时（11：00～13：00）的一半，这个时间正好是中午十二点。\r\n</p>', '/images/user/2014/11/28/3cf6dde9ed1a0936d1689aea26769755.jpg', '1', 'http://www.lishiz.com/article/5416.html', '时间,行刑', '1', '0', '40', '5', '1', '1', '1417160175', '1417161029');
+INSERT INTO `lsz_post` VALUES ('1', '十恶不赦”中的十恶指的是哪十恶？', '', '<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	在现代汉语中，常用“十恶不赦”来形容一个人罪大恶极、不可饶恕。但该成语中的“十恶”并非实指，而是泛指重大的罪行。然而，在我国古代，该成语中的“十恶”却是实有所指的。古代的“十恶”指的是律法规定的十条大罪，它是在西汉的“大逆不道不敬”罪的基础上发展起来的。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	北齐河清三年，尚书令、赵郡王等奏上《齐律》十二篇，“列重罪十条：一曰反逆，二曰大逆，三曰叛，四曰降，五曰恶逆，六曰不道，七曰不敬，八曰不孝，九曰不义，十曰内乱。其犯此十者，不在八议论赎之限。”\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	而到了隋朝开皇初年，随着佛教的兴盛，封建统治者遂将佛教之中的“十恶”之名引入律法，以之代替了《齐律》中的“重罪十条”，“十恶”之罪名遂正式出现。如《隋书·刑法志》卷二十五卷即载：“开皇元年……更定新律（指《开皇律》）……又置十恶之条，多采后齐之制，而颇有损益。一曰谋反，二曰谋大逆，三曰谋叛，四曰恶逆，五曰不道，六曰大不敬，七曰不孝，八曰不睦，九曰不义，十曰内乱。犯十恶及故杀人狱成者，虽会赦犹除名。”\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	“十恶”之罪的具体内容，《唐律疏议》中也有详细的规定。由于“十恶”之罪直接危害了君主专制制度的核心——君权、父权、神权和夫权，所以自隋代在《开皇律》中首次确立“十恶”之罪以后，历朝历代律法皆将之作为不赦之重罪，因此，遂有“十恶不赦”之说。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	另外，“十”在语境中表示最多、全了、满了。十恶不赦，那就是恶贯满盈了。“十恶不赦”，常用来形容罪大恶极、不可宽恕的人。古人往往给敌人列上十大罪名，以便出师有名。\r\n</p>', '/images/user/2014/11/27/a86fbf07f2fc6e63973e2f295579bfa8.jpg', '1', '', '文化,典故', '1', '0', '66', '3', '1', '1', '1417073172', '1417160274');
+INSERT INTO `lsz_post` VALUES ('2', '古代处决犯人为什么大多选在午时三刻？', '', '<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	古代刑法中处决犯人时，不但在季节上有要求，并且还具体到一天当中的某一时刻。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	季节上是统一到秋季，即秋后问斩。“秋后问斩”顾名思义，是指在秋季处死犯人。而处斩犯人的具体时间，则选在了秋季的某一天的“午时三刻”，为什么要选中这一时刻呢？因为根据阴阳五行学说，一年之中，秋季是阳气下降、阴气上升的时期，是属于死亡的季节；同样，一日之中，午时三刻以后，阳气下降、阴气上升，因此是死亡的时辰。\r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	<strong>“午时三刻”具体指的是哪个时间段？</strong> \r\n</p>\r\n<p style=\"color:#444444;text-indent:30px;font-size:15px;font-family:doublevregular, \'Microsoft YaHei\', \'Trebuchet MS\', Verdana, Tahoma, Arial, sans-serif;background-color:#FFFFFF;\">\r\n	“午时三刻”是在百刻制使用期间制定出来的。如果令一个时辰等于八刻的话，这一天就多出四刻。为此，有人提出在十二时辰中，子、卯、午、酉各九刻，其余的则为八刻；还有另一种提法则是，子、午各十刻，其余则八刻等。两种说法结合起来分析的话，都是中午以前和中午以后的半天将各分到二刻。这样一来，午时三刻加上前半天分到的二刻，就相当于午时五刻，也就是相当于全部午时（11：00～13：00）的一半，这个时间正好是中午十二点。\r\n</p>', '/images/user/2014/11/28/3cf6dde9ed1a0936d1689aea26769755.jpg', '1', 'http://www.lishiz.com/article/5416.html', '时间,行刑', '1', '0', '48', '5', '1', '1', '1417160175', '1417161029');
+INSERT INTO `lsz_post` VALUES ('3', '扒一扒“陛下”一词的由来', '', '哈哈哈哈', '/images/user/2014/12/01/c823949ed5ca263327e0c6ac691fd22a.jpg', '1', '', '陛下', '0', '0', '2', '0', '1', '1', '1417413121', '1417413121');
 
 -- ----------------------------
 -- Table structure for `lsz_tags`
@@ -127,7 +169,7 @@ CREATE TABLE `lsz_tags` (
   `nums` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lsz_tags
@@ -145,6 +187,7 @@ INSERT INTO `lsz_tags` VALUES ('11', '彩票', '1');
 INSERT INTO `lsz_tags` VALUES ('12', '赌博', '1');
 INSERT INTO `lsz_tags` VALUES ('13', '衙门', '1');
 INSERT INTO `lsz_tags` VALUES ('14', '官府', '1');
+INSERT INTO `lsz_tags` VALUES ('15', '陛下', '1');
 
 -- ----------------------------
 -- Table structure for `lsz_topic`
@@ -207,7 +250,7 @@ CREATE TABLE `lsz_user` (
 -- ----------------------------
 -- Records of lsz_user
 -- ----------------------------
-INSERT INTO `lsz_user` VALUES ('1', 'admin', 'admin@lishiz.com', 'c193b40010f0fac20bc869ba50f003e6', null, '1', null, '1', '0', '0', null, null, null, null, '0', '1417066194', '0', '0');
+INSERT INTO `lsz_user` VALUES ('1', 'admin', 'admin@lishiz.com', 'c193b40010f0fac20bc869ba50f003e6', '/images/user/2014/12/01/d245e2c15775950070e127790fc87859.jpg', '1', null, '1', '0', '0', null, null, null, null, '0', '1417066194', '0', '0');
 INSERT INTO `lsz_user` VALUES ('2', 'test', 'test@lishiz.com', 'e10adc3949ba59abbe56e057f20f883e', null, '1', null, '1', '0', '0', null, null, null, null, '0', '1417323848', '0', '0');
 
 -- ----------------------------
@@ -241,7 +284,7 @@ CREATE TABLE `lsz_user_flow` (
   `obj_status` tinyint(1) unsigned DEFAULT '0',
   `log_time` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lsz_user_flow
@@ -289,6 +332,7 @@ INSERT INTO `lsz_user_flow` VALUES ('55', '1', '2', '古代处决犯人为什么
 INSERT INTO `lsz_user_flow` VALUES ('56', '1', '2', '古代处决犯人为什么大多选在午时三刻？', '2', '9', '1', '1417328727');
 INSERT INTO `lsz_user_flow` VALUES ('57', '1', '2', '古代处决犯人为什么大多选在午时三刻？', '2', '9', '1', '1417329188');
 INSERT INTO `lsz_user_flow` VALUES ('58', '1', '2', '古代处决犯人为什么大多选在午时三刻？', '2', '9', '1', '1417329202');
+INSERT INTO `lsz_user_flow` VALUES ('59', '1', '3', '扒一扒“陛下”一词的由来', '2', '1', '1', '1417413121');
 
 -- ----------------------------
 -- Table structure for `lsz_user_follow`
@@ -320,7 +364,7 @@ CREATE TABLE `lsz_user_message` (
   `status` tinyint(1) unsigned DEFAULT '0',
   `send_time` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lsz_user_message
@@ -349,6 +393,35 @@ INSERT INTO `lsz_user_message` VALUES ('21', '1', '您有一条新回复', 'admi
 INSERT INTO `lsz_user_message` VALUES ('22', '1', '您有一条新回复', 'admin于2014-11-30 07:25:27回复了您的评论：<a href=\"/post/2\">古代处决犯人为什么大多选在午时三刻？</a>', '0', '1417328727');
 INSERT INTO `lsz_user_message` VALUES ('23', '1', '您有一条新回复', 'admin于2014-11-30 07:33:08回复了您的评论：<a href=\"/post/2\">古代处决犯人为什么大多选在午时三刻？</a>', '0', '1417329188');
 INSERT INTO `lsz_user_message` VALUES ('24', '2', '您有一条新回复', 'admin于2014-11-30 07:33:22回复了您的评论：<a href=\"/post/2\">古代处决犯人为什么大多选在午时三刻？</a>', '0', '1417329202');
+INSERT INTO `lsz_user_message` VALUES ('25', '1', '修改头像', '您于2014-12-01 06:45:31修改了头像', '1', '1417412731');
+INSERT INTO `lsz_user_message` VALUES ('26', '1', '您有一个新点赞', 'admin于2014-12-01 07:46:58点赞了您的评论：<a href=\"/post/1\">十恶不赦”中的十恶指的是哪十恶？</a>', '0', '1417416418');
+INSERT INTO `lsz_user_message` VALUES ('27', '1', '您有一个新点赞', 'admin于2014-12-01 08:03:12点赞了您的评论：<a href=\"/post/1\">十恶不赦”中的十恶指的是哪十恶？</a>', '0', '1417417392');
+INSERT INTO `lsz_user_message` VALUES ('28', '1', '您有一个新点赞', 'admin于2014-12-01 08:03:12点赞了您的评论：<a href=\"/post/1\">十恶不赦”中的十恶指的是哪十恶？</a>', '0', '1417417392');
+INSERT INTO `lsz_user_message` VALUES ('29', '1', '您有一个新点赞', 'admin于2014-12-01 08:03:12点赞了您的评论：<a href=\"/post/1\">十恶不赦”中的十恶指的是哪十恶？</a>', '0', '1417417392');
+INSERT INTO `lsz_user_message` VALUES ('30', '1', '您有一个新点赞', 'admin于2014-12-01 08:08:09点赞了您的评论：<a href=\"/post/2\">古代处决犯人为什么大多选在午时三刻？</a>', '1', '1417417689');
+INSERT INTO `lsz_user_message` VALUES ('31', '1', '您有一个新点赞', 'admin于2014-12-01 08:08:12点赞了您的评论：<a href=\"/post/2\">古代处决犯人为什么大多选在午时三刻？</a>', '0', '1417417692');
+INSERT INTO `lsz_user_message` VALUES ('32', '1', '您有一个新点赞', 'admin于2014-12-01 08:08:13点赞了您的评论：<a href=\"/post/2\">古代处决犯人为什么大多选在午时三刻？</a>', '0', '1417417693');
+
+-- ----------------------------
+-- Table structure for `lsz_user_upload`
+-- ----------------------------
+DROP TABLE IF EXISTS `lsz_user_upload`;
+CREATE TABLE `lsz_user_upload` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `path` varchar(100) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `description` text,
+  `media_type` tinyint(1) unsigned DEFAULT '1',
+  `upload_time` int(10) unsigned DEFAULT '0',
+  `last_update` int(10) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lsz_user_upload
+-- ----------------------------
+INSERT INTO `lsz_user_upload` VALUES ('1', '1', '/images/user/2014/12/01/c823949ed5ca263327e0c6ac691fd22a.jpg', null, null, '1', '1417413097', '1417413097');
 
 -- ----------------------------
 -- Table structure for `lsz_user_vote`
@@ -365,6 +438,11 @@ CREATE TABLE `lsz_user_vote` (
 -- Records of lsz_user_vote
 -- ----------------------------
 INSERT INTO `lsz_user_vote` VALUES ('1', '1', '3');
+INSERT INTO `lsz_user_vote` VALUES ('1', '1', '7');
+INSERT INTO `lsz_user_vote` VALUES ('1', '2', '7');
+INSERT INTO `lsz_user_vote` VALUES ('1', '3', '7');
+INSERT INTO `lsz_user_vote` VALUES ('1', '4', '7');
+INSERT INTO `lsz_user_vote` VALUES ('1', '18', '7');
 INSERT INTO `lsz_user_vote` VALUES ('2', '1', '3');
 INSERT INTO `lsz_user_vote` VALUES ('2', '1', '5');
 INSERT INTO `lsz_user_vote` VALUES ('2', '1', '6');
@@ -429,3 +507,6 @@ INSERT INTO `tbl_migration` VALUES ('m141127_062051_create_user_collect_table', 
 INSERT INTO `tbl_migration` VALUES ('m141127_062129_create_user_follow_table', '1417069560');
 INSERT INTO `tbl_migration` VALUES ('m141128_065200_create_user_flow_table', '1417158612');
 INSERT INTO `tbl_migration` VALUES ('m141128_070255_create_user_message_table', '1417158612');
+INSERT INTO `tbl_migration` VALUES ('m141201_020735_create_image_table', '1417409533');
+INSERT INTO `tbl_migration` VALUES ('m141201_023002_create_user_upload_table', '1417409533');
+INSERT INTO `tbl_migration` VALUES ('m141201_044721_create_image_upload_table', '1417409534');

@@ -79,6 +79,7 @@ class Comment extends CActiveRecord
 			'parent_id' => 'Parent',
 			'content' => 'Content',
 			'votes' => 'Votes',
+            'comments'=>'Comments',
 			'user_id' => 'User',
 			'status' => 'Status',
 			'comment_time' => 'Comment Time',
@@ -141,21 +142,38 @@ class Comment extends CActiveRecord
     public function afterSave(){
         $objString = ucfirst(ObjType::get($this->obj_type));
         $obj = $objString::model()->findByPk($this->obj_id);
-        $obj->setScenario('comment');
-        $obj->comments += 1;
-        $obj->save(false);
-        //通知被回复用户
-        if($this->parent_id){
-            $this->message($obj->title);
+        if($this->getScenario()=='create'){
+            $obj->setScenario('comment');
+            $obj->comments += 1;
+            $obj->save(false);
+            //通知被回复用户
+            if($this->parent_id){
+                $this->message($obj->title,'comment');
+            }
+        }
+        if($this->getScenario()=='vote'){
+            $this->message($obj->title,'vote');
         }
     }
 
-    public function message($title){
+    public function message($title,$type){
         $userMessage = new UserMessage();
-        $subject = '您有一条新回复';
-        $content = Yii::app()->user->name.'于'.date('Y-m-d H:i:s',$this->comment_time).
-            '回复了您的评论：'.CHtml::link($title,'/'.ObjType::get($this->obj_type).'/'.$this->obj_id);
-        $userMessage->send($this->comment_to,$subject,$content);
+        if($type=='comment'){
+            $subject = '您有一条新回复';
+            $content = Yii::app()->user->name.'于'.date('Y-m-d H:i:s',$this->comment_time).
+                '回复了您的评论：'.CHtml::link($title,'/'.ObjType::get($this->obj_type).'/'.$this->obj_id);
+            $userMessage->send($this->comment_to,$subject,$content);
+        }
+        if($type=='vote'){
+            $subject = '您有一个新点赞';
+            $content = Yii::app()->user->name.'于'.date('Y-m-d H:i:s',time()).
+                '点赞了您的评论：'.CHtml::link($title,'/'.ObjType::get($this->obj_type).'/'.$this->obj_id);
+            $userMessage->send($this->user_id,$subject,$content);
+        }
+    }
+
+    public function isVoted(){
+        return UserVote::model()->isVoted($this->id,'comment');
     }
 
 }

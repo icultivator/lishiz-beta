@@ -32,16 +32,20 @@ class MAjaxVoteWidget extends CWidget{
         $script = <<<FUL
 $(function () {
     $('.add-vote').live('click',function(){
+        var vote_link = this;
+        var obj_id = $(vote_link).attr('obj_id');
+        var obj_type = $(vote_link).attr('obj_type');
+        var votes_count = $(vote_link).next('span.votes-count');
+        var count = $(votes_count).text();
         $.post(
             '/vote/add',
-            {'obj_id':{$this->obj_id},'obj_type':{$this->obj_type}},
+            {'obj_id':obj_id,'obj_type':obj_type},
             function(data){
                 if(data.success){
-                    count = $(".votes-count").text();
                     count = parseInt(count)+1;
-                    $(".votes-count").text(count);
-                    $('#{$this->id}').text('取消点赞');
-                    $('#{$this->id}').attr('class','cancel-vote');
+                    $(votes_count).text(count);
+                    $(vote_link).text('取消点赞');
+                    $(vote_link).attr('class','cancel-vote');
                 }else{
                     alert(data.msg);
                 }
@@ -50,16 +54,20 @@ $(function () {
         );
     });
     $('.cancel-vote').live('click',function(){
+        var vote_link = this;
+        var obj_id = $(vote_link).attr('obj_id');
+        var obj_type = $(vote_link).attr('obj_type');
+        var votes_count = $(this).next('span.votes-count');
+        var count = $(votes_count).text();
         $.post(
             '/vote/cancel',
-            {'obj_id':{$this->obj_id},'obj_type':{$this->obj_type}},
+            {'obj_id':obj_id,'obj_type':obj_type},
             function(data){
                 if(data.success){
-                    count = $(".votes-count").text();
                     count = parseInt(count)-1;
-                    $(".votes-count").text(count);
-                    $('#{$this->id}').text('点赞');
-                    $('#{$this->id}').attr('class','add-vote');
+                    $(votes_count).text(count);
+                    $(vote_link).text('点赞');
+                    $(vote_link).attr('class','add-vote');
                 }else{
                     alert(data.msg);
                 }

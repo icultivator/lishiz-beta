@@ -205,17 +205,17 @@ class BookController extends Controller
             $ext = $tmpFile->extensionName;
             $filename = $name.'.'.$ext;
 
-            $picmanager = new MPicManager();
-            $filepath = $picmanager->getLocalPath($filename);
-            $tmpFile->saveAs($filepath);
+            $picManager = new MPicManager();
+            $filePath = $picManager->getLocalPath($filename);
+            $tmpFile->saveAs($filePath);
 
-            if(file_exists($filepath)){
+            if(file_exists($filePath)){
                 $userUpload = new UserUpload();
-                $userUpload->path = $picmanager->getWebPath($filename);
+                $userUpload->path = $picManager->getWebPath($filename);
                 $userUpload->save(false);
                 //生成缩略图
-                $picmanager->thumb($filepath);
-                echo CJSON::encode(array('cover'=>$picmanager->getWebPath($filename)));
+                $picManager->thumb($filePath);
+                echo CJSON::encode(array('cover'=>$picManager->getWebPath($filename)));
             }
         }
     }

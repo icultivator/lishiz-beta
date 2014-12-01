@@ -440,6 +440,9 @@ class UserController extends Controller
             $tmpFile->saveAs($filePath);
 
             if(file_exists($filePath)){
+                $userUpload = new UserUpload();
+                $userUpload->path = $picManager->getWebPath($filename);
+                $userUpload->save(false);
                 //生成缩略图
                 $picManager->thumb($filePath,250,250);
                 $thumbPath = MPicManager::getThumbPath($picManager->getWebPath($filename),250,250);

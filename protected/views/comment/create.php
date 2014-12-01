@@ -1,7 +1,8 @@
 <div class="add-comment" id="add-comment">
     <?php echo CHtml::hiddenField('parent_id','0',array('id'=>'comment-parent-id'));?>
     <?php echo CHtml::hiddenField('comment_to',$post_author,array('id'=>'comment-to'));?>
-    <?php echo CHtml::textArea('comment','',array('cols'=>60,'rows'=>5,'id'=>'comment-area'))?>
+    <?php echo CHtml::textArea('comment','',
+        array('cols'=>60,'rows'=>5,'id'=>'comment-area','placeholder'=>'说点什么吧...'))?>
     <?php echo CHtml::ajaxButton('发表','/comment/create',array(
         'type'=>'POST',
         'data'=>array(
@@ -16,10 +17,3 @@
         }'
     ))?>
 </div>
-<script type="text/javascript">
-    $('.add-sub-comment-link').click(function () {
-        alert($(this).attr('comment_to'));
-        $('#comment-parent-id').val($(this).attr('parent_id'));
-        $('#comment-to').val($(this).attr('comment_to'));
-    });
-</script>

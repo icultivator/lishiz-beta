@@ -9,6 +9,7 @@ class m141201_020735_create_image_table extends MDbMigration
             title VARCHAR(100) NOT NULL UNIQUE,
             cover VARCHAR(100) NOT NULL,
             content TEXT DEFAULT NULL,
+            tags VARCHAR(100) NOT NULL,
             status TINYINT(0) UNSIGNED DEFAULT 1,
             views INT UNSIGNED DEFAULT 0,
             votes INT UNSIGNED DEFAULT 0,
