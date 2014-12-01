@@ -28,7 +28,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','login','register','flow','collect','vote','follow','comment'),
+				'actions'=>array('index','view','login','register','flow','collect','vote','follow','comment','upload'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -387,11 +387,51 @@ class UserController extends Controller
         if(isset($_GET['opt'])&&$_GET['opt']=='avatar'){
             $model = $this->loadModel($id);
             $model->setScenario('avatar');
+
+            if(isset($_POST["upload_thumbnail"])) {
+                //Get the new coordinates to crop the image.
+                $x1 = $_POST["x1"];
+                $y1 = $_POST["y1"];
+                $x2 = $_POST["x2"]; // not really required
+                $y2 = $_POST["y2"]; // not really required
+                $w = $_POST["w"];
+                $h = $_POST["h"];
+                //Scale the image to the 100px by 100px
+                //$scale = 100/$w;
+                //$cropped = resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
+                //Reload the page again to view the thumbnail
+                //header("location:".$_SERVER["PHP_SELF"]);
+
+                exit();
+            }
+
             $this->render('avatar',array('model'=>$model));
             exit;
         }
 
         throw new CHttpException('404');
 
+    }
+
+    public function actionUpload(){
+        //读取图像上传域,并使用系统上传组件上传
+        $tmpFile   = CUploadedFile::getInstanceByName('image');
+
+        if(is_object($tmpFile) && get_class($tmpFile)==='CUploadedFile'){
+            $name = md5(Yii::app()->user->id.time());
+            //上传文件的扩展名
+            $ext = $tmpFile->extensionName;
+            $filename = $name.'.'.$ext;
+
+            $picmanager = new MPicManager();
+            $filepath = $picmanager->getLocalPath($filename);
+            $tmpFile->saveAs($filepath);
+
+            if(file_exists($filepath)){
+                //生成缩略图
+                $picmanager->thumb($filepath);
+                echo CJSON::encode(array('cover'=>$picmanager->getWebPath($filename)));
+            }
+        }
     }
 }

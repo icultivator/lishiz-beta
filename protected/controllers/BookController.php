@@ -210,6 +210,9 @@ class BookController extends Controller
             $tmpFile->saveAs($filepath);
 
             if(file_exists($filepath)){
+                $userUpload = new UserUpload();
+                $userUpload->path = $picmanager->getWebPath($filename);
+                $userUpload->save(false);
                 //生成缩略图
                 $picmanager->thumb($filepath);
                 echo CJSON::encode(array('cover'=>$picmanager->getWebPath($filename)));

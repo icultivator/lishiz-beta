@@ -106,6 +106,13 @@ return array(
             '4'=>'脱口秀',
             '5'=>'纪录片'
         ),
+        'media_type'=>array(
+            'image'=>1,
+            'file'=>2,
+            'video'=>3,
+            'audio'=>4,
+            'attachment'=>5
+        ),
         'opt_type'=>array(
             'create'=>1,
             'update'=>2,

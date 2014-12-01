@@ -11,7 +11,6 @@ class m141126_021741_create_comment_table extends MDbMigration
             parent_id INT UNSIGNED DEFAULT 0,
             comment_to INT UNSIGNED DEFAULT 0,
             content TEXT NOT NULL,
-            votes INT UNSIGNED DEFAULT 0,
             comments INT UNSIGNED DEFAULT 0,
             user_id INT UNSIGNED DEFAULT 0,
             status TINYINT(1) UNSIGNED DEFAULT 1,

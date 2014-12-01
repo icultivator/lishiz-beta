@@ -31,6 +31,7 @@
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
                 array('label'=>'Post','url'=>array('/post/index')),
+                array('label'=>'Image','url'=>array('/image/index')),
                 array('label'=>'Book','url'=>array('/book/index')),
                 array('label'=>'Video','url'=>array('/video/index')),
                 array('label'=>'Topic','url'=>array('/topic/index')),

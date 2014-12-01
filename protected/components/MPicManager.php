@@ -37,9 +37,18 @@ class MPicManager{
         return $this->localPath.$filename;
     }
 
+    public function getLocalPath2($webpath){
+        return $this->basePath.$webpath;
+    }
+
     //获取图片web路径
     public function getWebPath($filename){
         return $this->webPath.$filename;
+    }
+
+    public function getSize($filepath){
+        $arrImageInfo = getimagesize($filepath);
+        return $arrImageInfo;
     }
 
     //生成缩略图
