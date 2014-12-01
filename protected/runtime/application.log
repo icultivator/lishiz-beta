@@ -5466,3 +5466,142 @@ Stack trace:
 
 2014/12/01 10:13:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'beta-lishiz.image' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `image`.
 in E:\wamp\www\beta\lishiz-beta\index.php (13)
+2014/12/01 14:57:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "favicon.ico"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/12/01 14:57:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "favicon.ico"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2014/12/01 16:02:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:02:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:03:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:03:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:06:31 [error] [php] Undefined variable: arrSize (E:\wamp\www\beta\lishiz-beta\protected\views\user\avatar.php:37)
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(869): UserController->renderFile()
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(782): UserController->renderPartial()
+#2 E:\wamp\www\beta\lishiz-beta\protected\controllers\UserController.php(420): UserController->render()
+#3 unknown(0): UserController->actionProfile()
+#4 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CFilterChain.php(133): UserController->runAction()
+#8 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CInlineFilter.php(58): UserController->filterAccessControl()
+#11 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#13 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(265): UserController->runActionWithFilters()
+#14 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(282): UserController->run()
+#15 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 E:\wamp\www\beta\lishiz-beta\index.php(13): CWebApplication->run()
+REQUEST_URI=/user/profile/1?opt=avatar
+in E:\wamp\www\beta\lishiz-beta\protected\views\user\avatar.php (37)
+in E:\wamp\www\beta\lishiz-beta\protected\controllers\UserController.php (420)
+in E:\wamp\www\beta\lishiz-beta\index.php (13)
+2014/12/01 16:07:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:18:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/81e3aeb0ffe06a80728c3cfe5e18468c.JPG_795x502.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/81e3aeb0ffe06a80728c3cfe5e18468c.JPG_795x502.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:18:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:21:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/b7fb675487becda6b2faa7924645fc94.JPG_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:21:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/5313b3792f3aa11ccea1ccf95ec0728c.JPG_250x250.jpg_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/5313b3792f3aa11ccea1ccf95ec0728c.JPG_250x250.jpg_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:21:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/5313b3792f3aa11ccea1ccf95ec0728c.JPG_250x250.jpg_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/5313b3792f3aa11ccea1ccf95ec0728c.JPG_250x250.jpg_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---
+2014/12/01 16:25:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "images/user/2014/12/01/5313b3792f3aa11ccea1ccf95ec0728c.JPG_250x250.jpg_250x250.jpg"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('images/user/201...')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/user/2014/12/01/5313b3792f3aa11ccea1ccf95ec0728c.JPG_250x250.jpg_250x250.jpg
+HTTP_REFERER=http://beta.lishiz.com/user/profile/1?opt=avatar
+---

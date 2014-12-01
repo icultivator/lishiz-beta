@@ -43,8 +43,8 @@ $(function () {
         url: '{$this->request}',
         success: function (data) {
             $('#{$this->avatar}').attr('value',data.avatar);
-            $('#{$this->crop}').attr({'src':data.thumb,'width':data.width,'height':data.height});
-            $('#{$this->preview}').attr({'src':data.thumb});
+            $('#{$this->crop}').attr({'src':data.avatar,'width':data.width,'height':data.height});
+            $('#{$this->preview}').attr({'src':data.avatar});
         }
     });
 });

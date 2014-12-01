@@ -5,7 +5,7 @@
  * Date: 2014/11/26
  * Time: 12:54
  */
-
+Yii::import('ext.thumbnail.MPhpThumb');
 class MPicManager{
     private $basePath = '';
     private $localPath = '';
@@ -52,14 +52,40 @@ class MPicManager{
     }
 
     //生成缩略图
-    public function thumb($filepath){
+    public function thumb($filepath,$width=0,$height=0){
+        if($width==0 || $height==0){
+            return false;
+        }
+        try{
+            $thumb = new MPhpThumb();
+            $thumb->init();
+            $filepath_1 = $filepath.'_'.$width.'x'.$height.'.'.'jpg';
+            $thumb->create($filepath)->resize($width,$height)->save($filepath_1);
+        }catch(Exception $ex){
+            return false;
+        }
+        return true;
+    }
+
+    public static function getThumbPath($webpath,$width,$height,$extension='jpg'){
+        return $webpath.'_'.$width.'x'.$height.'.'.$extension;
+    }
+
+    public function crop($filepath,$x,$y,$w,$h){
+        try{
+            $thumb = new MPhpThumb();
+            $thumb->init();
+            $thumb->create($filepath)->crop($x,$y,$w,$h)->save($filepath);
+        }catch (Exception $ex){
+            return false;
+        }
         return true;
     }
 
     //图片删除处理
-    public function delete($path){
-        if(file_exists($this->basePath.$path)){
-
+    public function delete($webPath){
+        if(file_exists($this->getLocalPath2($webPath))){
+            @unlink($this->getLocalPath2($webPath));
         }
     }
 

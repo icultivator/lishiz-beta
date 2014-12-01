@@ -30,7 +30,8 @@ class MAvatarCropWidget extends CWidget{
         $script = <<<AVATOR
     var thumb_width = 100;
     var thumb_height = 100;
-
+    var current_large_image_width = 250;
+    var current_large_image_height = 250;
     $(window).load(function () {
         $("#thumbnail").imgAreaSelect({ aspectRatio: "1:thumb_height/thumb_width", onSelectChange: preview });
     });
@@ -53,8 +54,7 @@ class MAvatarCropWidget extends CWidget{
     function preview(img, selection) {
         var scaleX = thumb_width / selection.width;
         var scaleY = thumb_height / selection.height;
-        var current_large_image_width = $("#thumbnail").attr("width");
-        var current_large_image_height = $("#thumbnail").attr("height");
+
         $('#thumbnail + div > img').css({
             width: Math.round(scaleX * current_large_image_width) + 'px',
             height: Math.round(scaleY * current_large_image_height) + 'px',

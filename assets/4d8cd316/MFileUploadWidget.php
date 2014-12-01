@@ -8,7 +8,6 @@ class MFileUploadWidget extends CInputWidget
 {
     public $id;
     public $cover = 'cover';
-    public $crop = 'thumbnail';
     public $preview = 'preview';
     public $request = '/post/upload';
     public $avatar = '';
@@ -43,8 +42,7 @@ $(function () {
         url: '{$this->request}',
         success: function (data) {
             $('#{$this->avatar}').attr('value',data.avatar);
-            $('#{$this->crop}').attr({'src':data.thumb,'width':data.width,'height':data.height});
-            $('#{$this->preview}').attr({'src':data.thumb});
+            $('#{$this->preview}').attr({'src':data.avatar,'width':data.width,'height':data.height});
         }
     });
 });

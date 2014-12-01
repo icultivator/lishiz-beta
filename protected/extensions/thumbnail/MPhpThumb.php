@@ -23,7 +23,7 @@ require_once(dirname(__FILE__) . '/MThumbnail.php');
  * <p>
  * @author Johannes "Haensel" Bauer <thehaensel@gmail.com>
  */
-class EPhpThumb extends CComponent
+class MPhpThumb extends CComponent
 {
     public $options=array();
     
@@ -41,7 +41,7 @@ class EPhpThumb extends CComponent
      */
     public function create($filePath)
     {
-        return new EThumbnail(EPhpThumb::thumbFactory($filePath));
+        return new MThumbnail(MPhpThumb::thumbFactory($filePath));
     }
         
     /**

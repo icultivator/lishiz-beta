@@ -1,5 +1,5 @@
 <?php
-class EThumbnail extends CComponent
+class MThumbnail extends CComponent
 {
     private $_thumbnail;
     

@@ -388,24 +388,36 @@ class UserController extends Controller
             $model = $this->loadModel($id);
             $model->setScenario('avatar');
 
+            $picManager = new MPicManager();
+
             if(isset($_POST["upload_thumbnail"])) {
                 //Get the new coordinates to crop the image.
+                $avatar = $_POST['avatar'];
                 $x1 = $_POST["x1"];
                 $y1 = $_POST["y1"];
-                $x2 = $_POST["x2"]; // not really required
-                $y2 = $_POST["y2"]; // not really required
+                //$x2 = $_POST["x2"]; // not really required
+                //$y2 = $_POST["y2"]; // not really required
                 $w = $_POST["w"];
                 $h = $_POST["h"];
-                //Scale the image to the 100px by 100px
-                //$scale = 100/$w;
-                //$cropped = resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
-                //Reload the page again to view the thumbnail
-                //header("location:".$_SERVER["PHP_SELF"]);
-
-                exit();
+                $avatar_path = $picManager->getLocalPath2(MPicManager::getThumbPath($avatar,250,250));
+                $flag = $picManager->crop($avatar_path,$x1, $y1, $w,$h);
+                if($flag && file_exists($avatar_path)){
+                    $model->avatar = $avatar;
+                    $model->save(false);
+                    echo CJSON::encode(array('success'=>'保存头像成功！'));
+                }else{
+                    echo CJSON::encode(array('msg'=>'裁剪头像失败！'));
+                }
+                exit;
             }
 
-            $this->render('avatar',array('model'=>$model));
+            if($model->avatar){
+                $arrSize = $picManager->getSize($picManager->getLocalPath2(MPicManager::getThumbPath($model->avatar,250,250)));
+            }else{
+                $arrSize = array(250,250);
+            }
+
+            $this->render('avatar',array('model'=>$model,'arrSize'=>$arrSize));
             exit;
         }
 
@@ -423,14 +435,17 @@ class UserController extends Controller
             $ext = $tmpFile->extensionName;
             $filename = $name.'.'.$ext;
 
-            $picmanager = new MPicManager();
-            $filepath = $picmanager->getLocalPath($filename);
-            $tmpFile->saveAs($filepath);
+            $picManager = new MPicManager();
+            $filePath = $picManager->getLocalPath($filename);
+            $tmpFile->saveAs($filePath);
 
-            if(file_exists($filepath)){
+            if(file_exists($filePath)){
                 //生成缩略图
-                $picmanager->thumb($filepath);
-                echo CJSON::encode(array('cover'=>$picmanager->getWebPath($filename)));
+                $picManager->thumb($filePath,250,250);
+                $thumbPath = MPicManager::getThumbPath($picManager->getWebPath($filename),250,250);
+                $arrSize = $picManager->getSize($picManager->getLocalPath2($thumbPath));
+                echo CJSON::encode(array('thumb'=>$thumbPath,'avatar'=>$picManager->getWebPath($filename),
+                    'width'=>$arrSize[0],'height'=>$arrSize[1]));
             }
         }
     }
