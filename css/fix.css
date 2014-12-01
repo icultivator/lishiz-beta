@@ -1,0 +1,35 @@
+.user-home-ul{
+    margin: 15px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.user-home-ul li{
+    float: left;
+    margin-right: 10px;
+}
+
+.user-home-ul li a{
+    background: #51aded;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+}
+
+.clear{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: "";
+    clear: both;
+    height: 15px;
+    zoom:1;
+}
+
+.msg-not-read{
+    color: red;
+}
+
+.msg-read{
+    color: green;
+}
