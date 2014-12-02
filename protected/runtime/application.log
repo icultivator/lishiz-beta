@@ -5894,3 +5894,82 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/favicon.ico
 ---
+2014/12/02 13:52:06 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'title'. The SQL statement executed was: CREATE TABLE IF NOT EXISTS lsz_crawler(
+            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            title VARCHAR(100) UNIQUE NOT NULL,
+            description TEXT NOT NULL,
+            site VARCHAR(100) UNIQUE NOT NULL,
+            list VARCHAR(200) UNIQUE NOT NULL,
+            detail VARCHAR(200) UNIQUE NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            content VARCHAR(200) NOT NULL,
+            cover VARCHAR(200) NOT NULL,
+            tags VARCHAR(200) DEFAULT NULL,
+            user_id INT UNSIGNED DEFAULT 0,
+            create_time INT(10) UNSIGNED DEFAULT 0,
+            last_update INT(10) UNSIGNED DEFAULT 0,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB DEFAULT charset=utf8.
+2014/12/02 13:52:06 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'title'. The SQL statement executed was: CREATE TABLE IF NOT EXISTS lsz_crawler(
+            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            title VARCHAR(100) UNIQUE NOT NULL,
+            description TEXT NOT NULL,
+            site VARCHAR(100) UNIQUE NOT NULL,
+            list VARCHAR(200) UNIQUE NOT NULL,
+            detail VARCHAR(200) UNIQUE NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            content VARCHAR(200) NOT NULL,
+            cover VARCHAR(200) NOT NULL,
+            tags VARCHAR(200) DEFAULT NULL,
+            user_id INT UNSIGNED DEFAULT 0,
+            create_time INT(10) UNSIGNED DEFAULT 0,
+            last_update INT(10) UNSIGNED DEFAULT 0,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB DEFAULT charset=utf8' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\db\CDbCommand.php:358
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\protected\components\MDbMigration.php(12): CDbCommand->execute()
+#1 E:\wamp\www\beta\lishiz-beta\protected\migrations\m141202_054320_create_crawler_table.php(23): MDbMigration->createTableBySql('lsz_crawler', 'CREATE TABLE IF...')
+#2 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\cli\commands\MigrateCommand.php(385): m141202_054320_create_crawler_table->up()
+#3 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m141202_054320_...')
+#4 [internal function]: MigrateCommand->actionUp(Array)
+#5 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\console\CConsoleCommand.php(172): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#6 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#7 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#8 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CConsoleApplication->processRequest()
+#9 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\yiic.php(33): CApplication->run()
+#10 E:\wamp\www\beta\lishiz-beta\protected\yiic.php(7): require_once('E:\wamp\www\bet...')
+#11 {main}
+---
+2014/12/02 14:32:48 [error] [exception.CException] exception 'CException' with message '属性 "Crawler.target" 未被定义.' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\db\ar\CActiveRecord.php(145): CComponent->__get('target')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('target')
+#2 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\helpers\CHtml.php(1802): CHtml::resolveValue(Object(Crawler), 'target')
+#3 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\widgets\CActiveForm.php(847): CHtml::activeDropDownList(Object(Crawler), 'target', Array, Array)
+#4 E:\wamp\www\beta\lishiz-beta\protected\views\crawler\_form.php(31): CActiveForm->dropDownList(Object(Crawler), 'target', Array)
+#5 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CBaseController.php(126): require('E:\wamp\www\bet...')
+#6 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\wamp\www\bet...', Array, true)
+#7 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\wamp\www\bet...', Array, true)
+#8 E:\wamp\www\beta\lishiz-beta\protected\views\crawler\create.php(18): CController->renderPartial('_form', Array)
+#9 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CBaseController.php(126): require('E:\wamp\www\bet...')
+#10 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\wamp\www\bet...', Array, true)
+#11 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\wamp\www\bet...', Array, true)
+#12 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#13 E:\wamp\www\beta\lishiz-beta\protected\controllers\CrawlerController.php(71): CController->render('create', Array)
+#14 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\actions\CInlineAction.php(49): CrawlerController->actionCreate()
+#15 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#16 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#18 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#22 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(282): CController->run('create')
+#24 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('crawler/create')
+#25 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#26 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/crawler/create
+HTTP_REFERER=http://beta.lishiz.com/crawler/index
+---
