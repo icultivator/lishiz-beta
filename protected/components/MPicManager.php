@@ -89,6 +89,27 @@ class MPicManager{
         }
     }
 
+    public function download($imgUrl,$fileName){
+        if (trim($imgUrl) == '') {
+            return false;
+        }
+
+        //获取远程文件
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $imgUrl);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+        $img = curl_exec($ch);
+        curl_close($ch);
+
+        $fp2 = @fopen($this->getLocalPath($fileName) . $fileName, 'a');
+        fwrite($fp2, $img);
+        fclose($fp2);
+        unset($img);
+
+        return true;
+    }
+
     //图片库
     public function libs(){
 

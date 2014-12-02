@@ -8,7 +8,7 @@
 class MPointManager{
 
     //每天只能获得一次登录积分
-    public function login(){
+    public static function login(){
         if(Yii::app()->user->isGuest){
             return 0;
         }
@@ -21,7 +21,7 @@ class MPointManager{
         }
     }
 
-    public function avatar(){
+    public static function avatar(){
         if(Yii::app()->user->isGuest){
             return 0;
         }
@@ -30,7 +30,7 @@ class MPointManager{
         return $point;
     }
 
-    public function create($obj_type){
+    public static function create($obj_type){
         $objString  = ucfirst(ObjType::get($obj_type));
         $obj = $objString::model()->find('user_id = :uid',array(':uid'=>Yii::app()->user->id));
         switch($obj_type){
@@ -54,7 +54,7 @@ class MPointManager{
         return $point;
     }
 
-    public function collect($opt_type){
+    public static function collect($opt_type){
         switch($opt_type){
             case OptType::OPT_COLLECT:
                 $point = 5;
@@ -66,7 +66,7 @@ class MPointManager{
         return $point;
     }
 
-    public function comment($obj_type){
+    public static function comment($obj_type){
         switch($obj_type){
             case ObjType::ITEM_BOOK:
             case ObjType::ITEM_IMAGE:
@@ -84,7 +84,7 @@ class MPointManager{
         return $point;
     }
 
-    public function update($obj_type){
+    public static function update($obj_type){
         switch($obj_type){
             case ObjType::ITEM_USER:
                 $point = 20;
@@ -93,7 +93,7 @@ class MPointManager{
         return $point;
     }
 
-    public function verify($verify_type){
+    public static function verify($verify_type){
         switch($verify_type){
             case 'email':
                 $point = 20;
@@ -102,7 +102,7 @@ class MPointManager{
         return $point;
     }
 
-    public function vote($opt_type){
+    public static function vote($opt_type){
         switch($opt_type){
             case OptType::OPT_VOTE:
                 $point = 5;
@@ -114,7 +114,7 @@ class MPointManager{
         return $point;
     }
 
-    public function follow($opt_type){
+    public static function follow($opt_type){
         switch($opt_type){
             case OptType::OPT_FOLLOW:
                 $point = 5;
@@ -125,7 +125,7 @@ class MPointManager{
         }
     }
 
-    public function view($views){
+    public static function view($views){
         if($views>=500){
             $point = ($views/500)*10;
         }
