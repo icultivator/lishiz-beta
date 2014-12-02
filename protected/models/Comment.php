@@ -149,11 +149,19 @@ class Comment extends CActiveRecord
             //通知被回复用户
             if($this->parent_id){
                 $this->message($obj->title,'comment');
+                $this->point('comment');
             }
         }
         if($this->getScenario()=='vote'){
             $this->message($obj->title,'vote');
+            $this->point('vote');
         }
+
+        if($this->getScenario()=='cancel-vote'){
+            $this->message($obj->title,'cancel-vote');
+            $this->point('cancel-vote');
+        }
+
     }
 
     public function message($title,$type){
@@ -169,6 +177,32 @@ class Comment extends CActiveRecord
             $content = Yii::app()->user->name.'于'.date('Y-m-d H:i:s',time()).
                 '点赞了您的评论：'.CHtml::link($title,'/'.ObjType::get($this->obj_type).'/'.$this->obj_id);
             $userMessage->send($this->user_id,$subject,$content);
+        }
+    }
+
+    public function  point($type){
+        switch($type){
+            case 'vote':
+                $this->user->point +=3;
+                $this->user->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point += 5;
+                $opt_user->save(false);
+                break;
+            case 'cancel-vote':
+                $this->user->point -=3;
+                $this->user->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point -= 5;
+                $opt_user->save(false);
+                break;
+            case 'comment':
+                $this->user->point += 5;
+                $this->user->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point += 10;
+                $opt_user->save(false);
+                break;
         }
     }
 

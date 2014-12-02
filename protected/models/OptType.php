@@ -24,6 +24,12 @@ class OptType{
     const OPT_FOLLOW = 7;
     const OPT_CANCEL_FOLLOW = 8;
     const OPT_COMMENT = 9;
+    const OPT_VIEW = 10;
+    const OPT_REGISTER = 11;
+    const OPT_AVATAR = 12;
+    const OPT_LOGIN = 13;
+    const OPT_REPASS = 14;
+    const OPT_VERIFY_EMAIL = 15;
 
     public static function get($opt_type){
         switch($opt_type){
@@ -53,6 +59,9 @@ class OptType{
                 break;
             case self::OPT_COMMENT:
                 $opt = 'comment';
+                break;
+            case self::OPT_VIEW:
+                $opt = 'view';
                 break;
         }
         return $opt;

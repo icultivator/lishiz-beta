@@ -5886,3 +5886,11 @@ REQUEST_URI=/vote/add
 in E:\xampp\htdocs\beta\lishiz-beta\protected\models\ObjType.php (41)
 in E:\xampp\htdocs\beta\lishiz-beta\protected\controllers\VoteController.php (68)
 in E:\xampp\htdocs\beta\lishiz-beta\protected\controllers\VoteController.php (44)
+2014/12/02 12:57:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message '无法解析请求 "favicon.ico"。' in E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 E:\wamp\www\beta\lishiz-beta\lib\yiiframework\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 E:\wamp\www\beta\lishiz-beta\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---

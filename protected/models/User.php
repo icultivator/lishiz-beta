@@ -227,4 +227,39 @@ class User extends CActiveRecord
                 break;
         }
     }
+
+    public function  point(){
+        switch($this->getScenario()){
+            case 'register':
+                $this->point += 50;
+                $this->save(false);
+                break;
+            case 'login':
+                $this->point +=5;
+                $this->save(false);
+                break;
+            case OptType::get(OptType::OPT_FOLLOW):
+                $this->point +=3;
+                $this->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point -= 5;
+                $opt_user->save(false);
+                break;
+            case OptType::get(OptType::OPT_CANCEL_FOLLOW):
+                $this->point -=3;
+                $this->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point -= 5;
+                $opt_user->save(false);
+                break;
+            case OptType::get(OptType::OPT_UPDATE):
+                $this->point +=20;
+                $this->save(false);
+                break;
+            case 'avatar':
+                $this->point +=20;
+                $this->save(false);
+                break;
+        }
+    }
 }

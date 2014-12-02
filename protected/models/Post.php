@@ -177,6 +177,8 @@ class Post extends CActiveRecord
             $this->flow();
             $this->message();
         }
+        //用户积分获取
+        $this->point();
     }
 
     protected function afterDelete(){
@@ -202,6 +204,44 @@ class Post extends CActiveRecord
             $content = Yii::app()->user->name.Yii::t('opt',$this->getScenario()).'您的'.
                 Yii::t('item',ObjType::get($this->obj_type)).'：'.CHtml::link($this->title,'/post/'.$this->id);
             $this->userMessage->send($this->user_id,$subject,$content);
+        }
+    }
+
+    public function  point(){
+        switch($this->getScenario()){
+            case OptType::OPT_CREATE:
+                $this->user->point += 50;
+                $this->user->save(false);
+                break;
+            case OptType::OPT_VOTE:
+            case OptType::OPT_COLLECT:
+                $this->user->point +=3;
+                $this->user->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point += 5;
+                $opt_user->save(false);
+                break;
+            case OptType::OPT_CANCEL_VOTE:
+            case OptType::OPT_CANCEL_COLLECT:
+                $this->user->point -=3;
+                $this->user->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point -= 5;
+                $opt_user->save(false);
+                break;
+            case OptType::OPT_COMMENT:
+                $this->user->point += 5;
+                $this->user->save(false);
+                $opt_user = User::model()->findByPk(Yii::app()->user->id);
+                $opt_user->point += 10;
+                $opt_user->save(false);
+                break;
+            case OptType::OPT_VIEW:
+                if($this->views>=500){
+                    $this->user->point += floor($this->views / 500)*10;
+                    $this->user->save(false);
+                }
+                break;
         }
     }
 
